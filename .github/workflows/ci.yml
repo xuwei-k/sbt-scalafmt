@@ -24,15 +24,4 @@ jobs:
       - run:
           # for git tests
           git config --global user.email "scalafmt@scalameta.org" && git config --global user.name "scalafmt"
-      - run: sbt plugin/scripted "++ 3.x" compile plugin/scripted
-
-  formatting:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v5
-      - uses: actions/setup-java@v5
-        with:
-          distribution: 'temurin'
-          java-version: '11'
-          cache: 'sbt'
-      - run: ./bin/scalafmt --test
+      - run: sbt "++ 3.x" plugin/scripted

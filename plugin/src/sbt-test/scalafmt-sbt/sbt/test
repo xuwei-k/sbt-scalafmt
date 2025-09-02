@@ -67,6 +67,7 @@ $ newer p8/src/main/scala/Test2.scala timestamp
 > p13/scalafmt
 # prevent reading the source (without changing the mtime) to detect actual/uncached invocation of scalafmt
 $ exec chmod 000 p13/src/main/scala/Test.scala
+> set p13/Compile/unmanagedSources += file("p13/src/main/scala/Test.scala")
 ######## no-op expected when nothing has changed
 > p13/scalafmt
 > p13/scalafmtCheck
@@ -86,6 +87,7 @@ $ touch p13/src/main/scala/Test.scala
 > p14/scalafmtCheck
 # prevent reading the source (without changing the mtime) to detect actual/uncached invocation of scalafmt
 $ exec chmod 000 p14/src/main/scala/Test.scala
+> set p14/Compile/unmanagedSources += file("p14/src/main/scala/Test.scala")
 ######## no-op expected when nothing has changed
 > p14/scalafmtCheck
 > p14/scalafmt
@@ -105,6 +107,7 @@ $ touch p14/src/main/scala/Test.scala
 > p15/scalafmtCheck
 # prevent reading the source (without changing the mtime) to detect actual/uncached invocation of scalafmt
 $ exec chmod 000 p15/src/main/scala/Test.scala
+> set p15/Compile/unmanagedSources += file("p15/src/main/scala/Test.scala")
 ######## full run expected when config was updated and a source file added since last run
 $ copy-file .scalafmt.conf .scalafmt15.conf
 $ copy-file changes/bad.scala p15/src/main/scala/Test2.scala
@@ -119,6 +122,7 @@ $ delete p15/src/main/scala/Test2.scala
 > p16/scalafmtCheck
 # prevent reading the source (without changing the mtime) to detect actual/uncached invocation of scalafmt
 $ exec chmod 000 p16/src/main/scala/Test.scala
+> set p16/Compile/unmanagedSources += file("p16/src/main/scala/Test.scala")
 ######## full run expected when config was updated and a source file added since last run
 > set p16/scalafmtConfig := file(".scalafmt.conf")
 $ copy-file changes/bad.scala p16/src/main/scala/Test2.scala
@@ -134,7 +138,9 @@ $ copy-file changes/bad.scala p17/src/main/scala/Test2.scala
 -> p17/scalafmtCheck
 # prevent reading the sources (without changing the mtime) to detect actual/uncached invocation of scalafmt
 $ exec chmod 000 p17/src/main/scala/Test.scala
+> set p17/Compile/unmanagedSources += file("p17/src/main/scala/Test.scala")
 $ exec chmod 000 p17/src/main/scala/Test2.scala
+> set p17/Compile/unmanagedSources += file("p17/src/main/scala/Test2.scala")
 ######## incremental checking should carry over failure without actually processing any file
 > p17/failIffScalafmtCheckFailsBecauseProcessingInaccessibleSource
 -> p17/scalafmtCheck
