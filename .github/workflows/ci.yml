@@ -24,4 +24,4 @@ jobs:
       - run:
           # for git tests
           git config --global user.email "scalafmt@scalameta.org" && git config --global user.name "scalafmt"
-      - run: sbt "++ 3.x" plugin/scripted
+      - run: sbt "++ 3.x" plugin/scripted "++ 2.x" plugin/scripted
